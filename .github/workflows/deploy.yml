@@ -15,6 +15,10 @@ permissions:
   pages: write
   id-token: write
 
+# env:
+#   BACKEND: ${{ env.BACKEND }}
+#   URL: ${{ env.URL }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,8 +27,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Install, build, and upload your site
         env:
-          BACKEND: ${{ vars.BACKEND }}
-          URL: ${{ vars.URL }}
+          BACKEND: ${{ env.BACKEND }}
+          URL: ${{ env.URL }}
         uses: withastro/action@v0
         # with:
         # path: . # The root location of your Astro project inside the repository. (optional)
