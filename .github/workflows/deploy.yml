@@ -8,6 +8,8 @@ on:
   # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
 
+  deployment:
+
 # .env
 # Allow this job to clone the repo and create a page deployment
 permissions:
@@ -27,6 +29,9 @@ jobs:
         run: echo "$VARIABLES, ${{ env.BACKEND }}. y ${{ env.URL }}"
       - name: Checkout your repository using git
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
       - name: Install, build, and upload your site
         # env:
         #   BACKEND: ${{ env.BACKEND }}
