@@ -1,5 +1,7 @@
 ---
 import Layout from '../layout/Layout.astro'
+const BACKEND = import.meta.env.BACKEND
+const URL = import.meta.env.URL
 
 type Loan = {
 	id: number
@@ -9,13 +11,11 @@ type Loan = {
 	rate: number
 }
 
-const res = await fetch('https://api.lumau.com.ar/v1/loans', {
+const res = await fetch(`${BACKEND}/loans`, {
 	headers: { 'Content-Type': 'application/json' },
 })
 
 const loans: Loan[] = await res.json()
-
-console.log('prestamos', loans)
 ---
 
 <Layout>
@@ -152,7 +152,7 @@ console.log('prestamos', loans)
 
 <script is:inline src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<script define:vars={{ loans }}>
+<script define:vars={{ loans, URL, BACKEND }}>
 	let loanSelected = loans[0]
 	let quotes = document.getElementById('quotes')
 	let amount = document.getElementById('amount')
@@ -213,10 +213,10 @@ console.log('prestamos', loans)
 		e.preventDefault()
 		const formData = new FormData(e.target)
 		const data = Object.fromEntries(formData.entries())
-		data.url = 'jourdanmauricio.github.io/blackwing-astro'
+		data.url = URL
 
 		try {
-			const response = await fetch('https://api.lumau.com.ar/v1/contacts', {
+			const response = await fetch(`${BACKEND}/contacts`, {
 				method: 'POST',
 				body: JSON.stringify(data),
 				headers: { 'Content-Type': 'application/json' },

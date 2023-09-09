@@ -1,5 +1,8 @@
 ---
 import Spinner from '../Spinner.astro'
+
+const BACKEND = import.meta.env.BACKEND
+const URL = import.meta.env.URL
 ---
 
 <style>
@@ -95,27 +98,25 @@ import Spinner from '../Spinner.astro'
 	</div>
 </form>
 
-<script>
-	const form = document.getElementById('subscriber-form') as HTMLFormElement
+<script define:vars={{ BACKEND, URL }}>
+	const form = document.getElementById('subscriber-form')
 	form.addEventListener('submit', (e) => {
 		e.preventDefault()
 		const errorForm = validate()
 		if (errorForm) return
 
-		const loader = document.getElementById('loader') as HTMLFormElement
-		const formBody = document.getElementById('form-body') as HTMLFormElement
-		const messageContainer = document.getElementById(
-			'message-container'
-		) as HTMLFormElement
-		const message = document.getElementById('message') as HTMLFormElement
+		const loader = document.getElementById('loader')
+		const formBody = document.getElementById('form-body')
+		const messageContainer = document.getElementById('message-container')
+		const message = document.getElementById('message')
 
 		const data = Object.fromEntries(new FormData(form))
-		data.url = 'jourdanmauricio.github.io/blackwing-astro'
+		data.url = URL
 
 		loader.classList.remove('hidden')
 		formBody.classList.add('hidden')
 
-		fetch('https://api.lumau.com.ar/v1/subscribers', {
+		fetch(`${BACKEND}/subscribers`, {
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
@@ -138,9 +139,7 @@ import Spinner from '../Spinner.astro'
 			})
 	})
 
-	const fieldsToValidate = form.querySelectorAll(
-		'[required], [pattern]'
-	) as NodeListOf<HTMLInputElement>
+	const fieldsToValidate = form.querySelectorAll('[required], [pattern]')
 
 	for (let i = 0; i < fieldsToValidate.length; i++) {
 		fieldsToValidate[i].addEventListener('change', () =>
@@ -161,7 +160,7 @@ import Spinner from '../Spinner.astro'
 		if (error) return error
 	}
 
-	function validateField(field: HTMLInputElement) {
+	function validateField(field) {
 		const error = document.getElementById(`error-${field.id}`)
 		if (error) {
 			if (field.required && field.value.length === 0) {
