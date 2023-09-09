@@ -21,6 +21,7 @@ try {
 		console.log('Error GET Loans: ', res.status, res.statusText)
 	}
 	loans = await res.json()
+	console.log('LOANS', loans)
 } catch (error) {
 	console.log('ERROR DE CONEXION. Contacte al administrador!!!!', error)
 }
