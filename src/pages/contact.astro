@@ -223,7 +223,7 @@ import Layout from '../layout/Layout.astro'
 		e.preventDefault()
 		const formData = new FormData(e.target)
 		const data = Object.fromEntries(formData.entries())
-		data.url = 'jourdanmauricio.github.io/blacwing-js'
+		data.url = 'jourdanmauricio.github.io/blackwing-astro'
 
 		try {
 			const response = await fetch('https://api.lumau.com.ar/v1/contacts', {
