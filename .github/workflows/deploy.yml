@@ -15,14 +15,16 @@ permissions:
   pages: write
   id-token: write
 
-# env:
-#   BACKEND: ${{ env.BACKEND }}
-#   URL: ${{ env.URL }}
+env:
+  BACKEND: ${{ vars.BACKEND }}
+  URL: ${{ vars.URL }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Vars Repo
+        run: echo "$VARIABLES, ${{ env.BACKEND }}. y ${{ env.URL }}"
       - name: Checkout your repository using git
         uses: actions/checkout@v3
       - name: Install, build, and upload your site
