@@ -11,11 +11,19 @@ type Loan = {
 	rate: number
 }
 
-const res = await fetch(`${BACKEND}/loans`, {
-	headers: { 'Content-Type': 'application/json' },
-})
+let loans: Loan[] = []
 
-const loans: Loan[] = await res.json()
+try {
+	const res = await fetch(`${BACKEND}/loans`, {
+		headers: { 'Content-Type': 'application/json', url: URL },
+	})
+	if (res.status !== 200) {
+		console.log('Error GET Loans: ', res.status, res.statusText)
+	}
+	loans = await res.json()
+} catch (error) {
+	console.log('ERROR DE CONEXION. Contacte al administrador!!!!', error)
+}
 ---
 
 <Layout>
@@ -29,9 +37,10 @@ const loans: Loan[] = await res.json()
 					<label class="w-1/3" for="loanType">Tipo de préstamo:</label>
 					<select class="w-2/3 py-1 px-2 border-2" id="loanType">
 						{
-							loans.map((loan) => (
-								<option value={loan.type}>{loan.type}</option>
-							))
+							loans.length > 0 &&
+								loans.map((loan) => (
+									<option value={loan.type}>{loan.type}</option>
+								))
 						}
 					</select>
 				</div>
@@ -153,6 +162,7 @@ const loans: Loan[] = await res.json()
 <script is:inline src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script define:vars={{ loans, URL, BACKEND }}>
+	console.log('Tipos de préstamos', loans)
 	let loanSelected = loans[0]
 	let quotes = document.getElementById('quotes')
 	let amount = document.getElementById('amount')
