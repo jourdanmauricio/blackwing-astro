@@ -8,6 +8,7 @@ on:
   # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
 
+# .env
 # Allow this job to clone the repo and create a page deployment
 permissions:
   contents: read
@@ -21,6 +22,9 @@ jobs:
       - name: Checkout your repository using git
         uses: actions/checkout@v3
       - name: Install, build, and upload your site
+        env:
+          BACKEND: ${{ vars.BACKEND }}
+          URL: ${{ vars.URL }}
         uses: withastro/action@v0
         # with:
         # path: . # The root location of your Astro project inside the repository. (optional)
