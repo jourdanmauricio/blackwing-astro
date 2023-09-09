@@ -27,7 +27,11 @@ import ThemeIcon from './ThemeIcon.astro'
 		/>
 		<!-- Fin menu mobile -->
 		<div class="flex gap-4 items-center">
-			<img class="w-10 h-10" src="/images/logo.png" alt="Logo Black Wing" />
+			<img
+				class="w-10 h-10"
+				src="/blackwing-astro/images/logo.png"
+				alt="Logo Black Wing"
+			/>
 			<h1 class="text-2xl font-black">Black Wing</h1>
 		</div>
 
@@ -35,39 +39,43 @@ import ThemeIcon from './ThemeIcon.astro'
 			class="bg-slate-100 dark:bg-slate-950 dark:text-slate-100 text-slate-950 sm:dark:bg-slate-100 sm:dark:text-slate-950 fixed md:relative top-[85px] md:top-auto bottom-0 w-full md:w-fit -left-full md:left-auto peer-checked:left-0 flex flex-col md:flex-row items-center justify-center transition-all duration-500 gap-8"
 		>
 			<a
-				href="/"
+				href="/blackwing-astro"
 				class={`${
 					Astro.url.pathname === '/' ? 'text-teal-800' : ''
 				} menu__item anim__bottom to__center`}>Home</a
 			>
 			<a
-				href="about"
+				href="/blackwing-astro/about"
 				class={`${
-					Astro.url.pathname === '/about' ? 'text-teal-800' : ''
+					Astro.url.pathname === '/blackwing-astro/about' ? 'text-teal-800' : ''
 				} menu__item anim__bottom to__center`}>Empresa</a
 			>
 			<a
-				href="services"
+				href="/blackwing-astro/services"
 				class={`${
-					Astro.url.pathname === '/services' ? 'text-teal-800' : ''
+					Astro.url.pathname === '/blackwing-astro/services'
+						? 'text-teal-800'
+						: ''
 				} menu__item anim__bottom to__center`}>Servicios</a
 			>
 			<a
-				href="blog"
+				href="/blackwing-astro/blog"
 				class={`${
-					Astro.url.pathname === '/blog' ? 'text-teal-800' : ''
+					Astro.url.pathname === '/blackwing-astro/blog' ? 'text-teal-800' : ''
 				} menu__item anim__bottom to__center`}>Blog</a
 			>
 			<a
-				href="loans"
+				href="/blackwing-astro/loans"
 				class={`${
-					Astro.url.pathname === '/loans' ? 'text-teal-800' : ''
+					Astro.url.pathname === '/blackwing-astro/loans' ? 'text-teal-800' : ''
 				} menu__item anim__bottom to__center`}>Préstamos</a
 			>
 			<a
-				href="contact"
+				href="/blackwing-astro/contact"
 				class={`${
-					Astro.url.pathname === '/contact' ? 'text-teal-800' : ''
+					Astro.url.pathname === '/blackwing-astro/contact'
+						? 'text-teal-800'
+						: ''
 				} menu__item anim__bottom to__center`}>Contacto</a
 			>
 		</div>

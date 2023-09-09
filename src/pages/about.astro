@@ -1,5 +1,36 @@
 ---
 import Layout from '../layout/Layout.astro'
+
+const staff = [
+	{
+		id: 1,
+		image: '/blackwing-astro/images/empleado1.webp',
+		altImage: 'Foto del empleado 1',
+		name: 'Nombre del empleado 1',
+		position: 'Cargo del empleado 1',
+	},
+	{
+		id: 2,
+		image: '/blackwing-astro/images/empleado2.webp',
+		altImage: 'Foto del empleado 2',
+		name: 'Nombre del empleado 2',
+		position: 'Cargo del empleado 2',
+	},
+	{
+		id: 3,
+		image: '/blackwing-astro/images/empleado3.webp',
+		altImage: 'Foto del empleado 3',
+		name: 'Nombre del empleado 3',
+		position: 'Cargo del empleado 3',
+	},
+	{
+		id: 4,
+		image: '/blackwing-astro/images/empleado4.webp',
+		altImage: 'Foto del empleado 4',
+		name: 'Nombre del empleado 4',
+		position: 'Cargo del empleado 4',
+	},
+]
 ---
 
 <Layout pageTitle="Nosotros">
@@ -32,42 +63,19 @@ import Layout from '../layout/Layout.astro'
 		<section class="py-8 px-0">
 			<h2 class="text-3xl font-medium text-center">Nuestro equipo</h2>
 			<section class="flex flex-row flex-wrap justify-around gap-4">
-				<div class="mt-12 text-center">
-					<img
-						class="max-w-[200px] block my-0 mx-auto rounded-full"
-						src="/images/empleado1.webp"
-						alt="Foto del empleado 1"
-					/>
-					<h3 class="my-2 mx-0">Nombre del empleado 1</h3>
-					<p class="leading-6">Cargo del empleado 1</p>
-				</div>
-				<div class="mt-12 text-center">
-					<img
-						class="max-w-[200px] block my-0 mx-auto rounded-full"
-						src="/images/empleado2.webp"
-						alt="Foto del empleado 2"
-					/>
-					<h3 class="my-2 mx-0">Nombre del empleado 2</h3>
-					<p class="leading-6">Cargo del empleado 2</p>
-				</div>
-				<div class="mt-12 text-center">
-					<img
-						class="max-w-[200px] block my-0 mx-auto rounded-full"
-						src="/images/empleado3.webp"
-						alt="Foto del empleado 3"
-					/>
-					<h3 class="my-2 mx-0">Nombre del empleado 3</h3>
-					<p class="leading-6">cargo del empleado 3</p>
-				</div>
-				<div class="mt-12 text-center">
-					<img
-						class="max-w-[200px] block my-0 mx-auto rounded-full"
-						src="/images/empleado4.webp"
-						alt="Foto del empleado 4"
-					/>
-					<h3 class="my-2 mx-0">Nombre del empleado 4</h3>
-					<p class="leading-6">Cargo del empleado 4</p>
-				</div>
+				{
+					staff.map((employee) => (
+						<div class="mt-12 text-center">
+							<img
+								class="max-w-[200px] block my-0 mx-auto rounded-full"
+								src={employee.image}
+								alt={employee.altImage}
+							/>
+							<h3 class="my-2 mx-0">{employee.name}</h3>
+							<p class="leading-6">{employee.position}</p>
+						</div>
+					))
+				}
 			</section>
 		</section>
 	</main>
