@@ -1,0 +1,50 @@
+<section class="experiences">
+	<h2 data-dark>Experiencias</h2>
+	<div class="experiences__container">
+		<iframe
+			class="experiences__item"
+			width="560"
+			height="315"
+			src="https://www.youtube.com/embed/kMTBs_1cs6M"
+			frameborder="0"
+			allow="autoplay; encrypted-media"
+			allowfullscreen></iframe>
+		<iframe
+			class="experiences__item"
+			width="560"
+			height="315"
+			src="https://www.youtube.com/embed/9sCVcWD1Svs"
+			frameborder="0"
+			allow="autoplay; encrypted-media"
+			allowfullscreen></iframe>
+	</div>
+</section>
+
+<style>
+	.experiences {
+		padding: 1.25rem;
+		margin: 2.5rem 0;
+		width: 100%;
+	}
+	.experiences h2 {
+		font-size: 1.5rem;
+		text-align: center;
+	}
+	.experiences__container {
+		margin-top: 2.5rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		gap: 1.875rem;
+	}
+	.experiences__container__item {
+		width: 100%;
+	}
+
+	@media (min-width: 768px) {
+		.experiences__container {
+			flex-direction: row;
+		}
+	}
+</style>

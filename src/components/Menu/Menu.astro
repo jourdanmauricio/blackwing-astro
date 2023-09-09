@@ -1,0 +1,107 @@
+---
+import ThemeIcon from './ThemeIcon.astro'
+---
+
+<nav
+	class="sticky top-0 bg-slate-50 text-slate-800 h-20 w-full z-50 shadow-lg dark:shadow-lg dark:shadow-slate-600"
+>
+	<div
+		class="relative flex items-center justify-between h-full w-11/12 mx-auto"
+	>
+		<!-- Menu mobile -->
+		<label for="menu-mobile" class="cursor-pointer block md:hidden">
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="40"
+				height="40"
+				viewBox="0 0 24 24"
+				class="fill-black"
+				><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"></path></svg
+			>
+		</label>
+
+		<input
+			type="checkbox"
+			id="menu-mobile"
+			class="cursor-pointer hidden absolute left-0 peer"
+		/>
+		<!-- Fin menu mobile -->
+		<div class="flex gap-4 items-center">
+			<img class="w-10 h-10" src="/images/logo.png" alt="Logo Black Wing" />
+			<h1 class="text-2xl font-black">Black Wing</h1>
+		</div>
+
+		<div
+			class="bg-slate-100 dark:bg-slate-950 dark:text-slate-100 text-slate-950 sm:dark:bg-slate-100 sm:dark:text-slate-950 fixed md:relative top-[85px] md:top-auto bottom-0 w-full md:w-fit -left-full md:left-auto peer-checked:left-0 flex flex-col md:flex-row items-center justify-center transition-all duration-500 gap-8"
+		>
+			<a
+				href="/"
+				class={`${
+					Astro.url.pathname === '/' ? 'text-teal-800' : ''
+				} menu__item anim__bottom to__center`}>Home</a
+			>
+			<a
+				href="about"
+				class={`${
+					Astro.url.pathname === '/about' ? 'text-teal-800' : ''
+				} menu__item anim__bottom to__center`}>Empresa</a
+			>
+			<a
+				href="services"
+				class={`${
+					Astro.url.pathname === '/services' ? 'text-teal-800' : ''
+				} menu__item anim__bottom to__center`}>Servicios</a
+			>
+			<a
+				href="blog"
+				class={`${
+					Astro.url.pathname === '/blog' ? 'text-teal-800' : ''
+				} menu__item anim__bottom to__center`}>Blog</a
+			>
+			<a
+				href="loans"
+				class={`${
+					Astro.url.pathname === '/loans' ? 'text-teal-800' : ''
+				} menu__item anim__bottom to__center`}>Préstamos</a
+			>
+			<a
+				href="contact"
+				class={`${
+					Astro.url.pathname === '/contact' ? 'text-teal-800' : ''
+				} menu__item anim__bottom to__center`}>Contacto</a
+			>
+		</div>
+		<ThemeIcon />
+	</div>
+</nav>
+
+<style>
+	/**********************/
+	/***   ANIMATIONS   ***/
+	/**********************/
+	.menu__item {
+		position: relative;
+		display: block;
+		/* padding: 4px 8px; */
+	}
+	.anim__bottom::after {
+		content: '';
+		position: absolute;
+		display: inline-block;
+		bottom: -1px;
+		width: 0%;
+		text-align: center;
+		background: teal;
+		height: 1px;
+		transition: width 0.5s ease, left 0.5s ease, right 0.5s ease;
+	}
+	.anim__bottom:hover::after {
+		width: 100%;
+	}
+	.to__center::after {
+		left: 50%;
+	}
+	.to__center:hover::after {
+		left: 0%;
+	}
+</style>

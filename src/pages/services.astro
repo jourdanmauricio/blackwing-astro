@@ -1,0 +1,119 @@
+---
+import Layout from '../layout/Layout.astro'
+
+const services = [
+	{
+		image: '/images/servicio-1.png',
+		alt: 'Servicio 1',
+		title: 'Gestión patrimonial',
+		content:
+			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis suscipit harum at ipsum ea similique mollitia quod eaque illo amet, numquam ex veritatis molestias possimus. Veritatis esse a in reiciendis?',
+	},
+
+	{
+		image: '/images/servicio-2.png',
+		alt: 'Servicio 2',
+		title: 'Atención personalizada',
+		content:
+			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis suscipit harum at ipsum ea similique mollitia quod eaque illo amet, numquam ex veritatis molestias possimus. Veritatis esse a in reiciendis?',
+	},
+
+	{
+		image: '/images/servicio-3.png',
+		alt: 'Servicio 3',
+		title: 'Auditorias',
+		content:
+			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis suscipit harum at ipsum ea similique mollitia quod eaque illo amet, numquam ex veritatis molestias possimus. Veritatis esse a in reiciendis?',
+	},
+
+	{
+		image: '/images/servicio-4.png',
+		alt: 'Servicio 4',
+		title: 'Asesoramiento técnico',
+		content:
+			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis suscipit harum at ipsum ea similique mollitia quod eaque illo amet, numquam ex veritatis molestias possimus. Veritatis esse a in reiciendis?',
+	},
+
+	{
+		image: '/images/servicio-5.png',
+		alt: 'Servicio 5',
+		title: 'Capacitaciones',
+		content:
+			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis suscipit harum at ipsum ea similique mollitia quod eaque illo amet, numquam ex veritatis molestias possimus. Veritatis esse a in reiciendis?',
+	},
+
+	{
+		image: '/images/servicio-6.png',
+		alt: 'Servicio 6',
+		title: 'Certificaciones',
+		content:
+			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis suscipit harum at ipsum ea similique mollitia quod eaque illo amet, numquam ex veritatis molestias possimus. Veritatis esse a in reiciendis?',
+	},
+]
+---
+
+<Layout>
+	<header class="heroserv">
+		<div
+			class="flex md:flex-row flex-col-reverse items-center justify-center max-w-[90%] my-0 mx-auto gap-8"
+		>
+			<div class="py-8 px-0 text-white text-center w-full md:w-1/2">
+				<h2 class="text-3xl font-medium text-center py-4">
+					Nuestros servicios
+				</h2>
+				<p class="py-4">
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
+					voluptatum eligendi minus sequi commodi culpa
+				</p>
+				<a href="">Asesorate con nuestros especialiestas</a>
+			</div>
+			<div class="max-w-full w-full md:w-1/2">
+				<img src="../images/hero_services-opt.png" alt="Nuestros servicios" />
+			</div>
+		</div>
+	</header>
+
+	<main>
+		<section class="p-16 text-bg-mode">
+			<div
+				class="max-w-[61.25rem] my-0 mx-auto flex items-center justify-center gap-8 flex-wrap"
+			>
+				{
+					services.map((service) => (
+						<div class="max-w-[18.75rem] flex-grow flex-shrink basis-[18.75rem] hover:shadow-lg dark:hover:shadow-white">
+							<div class="max-w-[3.175rem] my-0 mx-auto">
+								<img
+									class="w-full block bg-slate-100 rounded-full"
+									src={service.image}
+									alt={service.alt}
+								/>
+							</div>
+							<div>
+								<h3 class="p-3 text-center">
+									<strong>{service.title}</strong>
+								</h3>
+								<p class="p-3">{service.content}</p>
+							</div>
+						</div>
+					))
+				}
+			</div>
+		</section>
+	</main>
+
+	<style>
+		.heroserv {
+			background: linear-gradient(
+				116deg,
+				#ff3a3a -15.11%,
+				#ae249a 51.46%,
+				#081ea9 113.99%
+			);
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-position: center;
+			min-height: -moz-fit-content;
+			min-height: fit-content;
+		}
+	</style>
+</Layout>

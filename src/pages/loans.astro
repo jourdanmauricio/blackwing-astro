@@ -1,0 +1,247 @@
+---
+import Layout from '../layout/Layout.astro'
+
+type Loan = {
+	id: number
+	type: string
+	maxQuantityQuotes: number
+	maxAmount: number
+	rate: number
+}
+
+const res = await fetch('https://api.lumau.com.ar/v1/loans', {
+	headers: { 'Content-Type': 'application/json' },
+})
+
+const loans: Loan[] = await res.json()
+
+console.log('prestamos', loans)
+---
+
+<Layout>
+	<main class="p-8 text-bg-mode">
+		<section
+			class="rounded-lg border border-slate-800 text-slate-800 bg-slate-50 p-4 w-full lg:max-w-[70%] mx-auto"
+		>
+			<h2 class="text-xl text-center">Simulá tu préstamo</h2>
+			<form id="loan-form" class="mt-4" novalidate>
+				<div class="flex py-2 items-center">
+					<label class="w-1/3" for="loanType">Tipo de préstamo:</label>
+					<select class="w-2/3 py-1 px-2 border-2" id="loanType">
+						{
+							loans.map((loan) => (
+								<option value={loan.type}>{loan.type}</option>
+							))
+						}
+					</select>
+				</div>
+				<div class="flex py-2 items-center">
+					<label class="w-1/3" for="montoInput">Monto del préstamo:</label>
+					<input
+						class="w-2/3 py-1 px-2 border-2"
+						type="number"
+						id="amount"
+						name="amount"
+						value="0"
+						min="2"
+						autocomplete="off"
+						step="1"
+						required
+					/>
+				</div>
+				<div class="flex py-2 items-center">
+					<label class="w-1/3" for="plazoInput">Plazo (en meses):</label>
+					<input
+						class="w-2/3 py-1 px-2 border-2"
+						type="number"
+						id="quotes"
+						name="quotes"
+						value="0"
+						min="2"
+						autocomplete="off"
+						step="1"
+						required
+					/>
+				</div>
+				<div class="flex py-2 items-center">
+					<label class="w-1/3" for="plazoInput">Ingresos mensuales:</label>
+					<input
+						class="w-2/3 py-1 px-2 border-2"
+						type="number"
+						id="month-revenew"
+						name="month-revenew"
+						value="0"
+						min="2"
+						autocomplete="off"
+						step="1"
+						required
+					/>
+				</div>
+				<div class="text-center border-t">
+					<input
+						class="py-1 px-2 text-slate-100 bg-slate-800 mt-4 rounded hover:bg-slate-900 hover:cursor-pointer"
+						type="submit"
+						value="Calcular"
+					/>
+				</div>
+			</form>
+		</section>
+
+		<section
+			class="rounded-lg border border-slate-800 text-slate-800 bg-slate-50 p-4 w-full lg:max-w-[70%] mx-auto text-center mt-8"
+		>
+			<h2 class="text-xl">Solicita tu préstamo</h2>
+			<form method="POST" id="request-form" class="mt-4">
+				<legend
+					>Ingresa tus datos y un asesor te contactará a la brevedad</legend
+				>
+				<div class="flex py-2 items-center mt-4">
+					<label class="w-1/3 text-left" for="name">Nombre completo:</label>
+					<input
+						class="w-2/3 py-1 px-2 border-2"
+						id="name"
+						name="name"
+						placeholder="Nombre completo"
+						required
+					/>
+				</div>
+
+				<div class="flex py-2">
+					<label class="w-1/3 text-left" for="phone">Teléfono:</label>
+					<input
+						class="w-2/3 py-1 px-2 border-2"
+						id="phone"
+						name="phone"
+						placeholder="Teléfono"
+						required
+					/>
+				</div>
+
+				<div class="flex py-2">
+					<label class="w-1/3 text-left" for="phone">Email:</label>
+					<input
+						class="w-2/3 py-1 px-2 border-2"
+						id="email"
+						name="email"
+						placeholder="Email"
+						required
+					/>
+				</div>
+
+				<div class="w-full py-2">
+					<textarea
+						class="w-full border-2"
+						rows="5"
+						id="comment"
+						name="comment"
+						placeholder="Comentario"></textarea>
+				</div>
+
+				<div class="text-center border-t">
+					<input
+						id="btn-solicitar"
+						class="py-1 px-2 text-slate-100 bg-slate-800 mt-4 rounded hover:bg-slate-900 hover:cursor-pointer"
+						type="submit"
+						value="Solicitar"
+					/>
+				</div>
+			</form>
+		</section>
+	</main>
+</Layout>
+
+<script is:inline src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script define:vars={{ loans }}>
+	let loanSelected = loans[0]
+	let quotes = document.getElementById('quotes')
+	let amount = document.getElementById('amount')
+	quotes.max = loans[0].maxQuantityQuotes
+	amount.max = loans[0].maxAmount
+
+	const loanType = document.getElementById('loanType')
+	loanType.addEventListener('change', changeLoanType)
+
+	const monthRevenew = document.getElementById('month-revenew')
+
+	const loanForm = document.getElementById('loan-form')
+	loanForm.addEventListener('submit', submitLoan)
+
+	const requestForm = document.getElementById('request-form')
+	requestForm.addEventListener('submit', submitResquest)
+
+	function changeLoanType(e) {
+		console.log('e.target.value', e.target.value)
+		loanSelected = loans.find((loan) => loan.type === e.target.value)
+		console.log('loan selected', loanSelected)
+		loanSelected
+		quotes.value = 0
+		amount.value = 0
+		quotes.max = loanSelected.maxQuantityQuotes
+		amount.max = loanSelected.maxAmount
+	}
+
+	function calculateFee() {
+		const monthRate = loanSelected.rate / 100 / 12
+		// const quotesInput = parseInt(quotes.value)
+		const amountInput = parseInt(amount.value)
+		const quote =
+			(amountInput * monthRate) / (1 - Math.pow(1 + monthRate, -amountInput))
+		return quote.toFixed(2)
+	}
+
+	function validateRevenue(fee) {
+		const maxRevenueAffected = (parseInt(monthRevenew.value) * 30) / 100
+		if (maxRevenueAffected < fee) {
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: 'El valor de la cuota no puede superar el 30% de los ingresos',
+				footer: `<ul><li>Valor de la cuota: $${fee}</li><li>Ingreso máximo afectado (30%): ${maxRevenueAffected}</li><p><strong>Incremente la cantidad de cuotas o disminuya el monto solicitado</strong></p>`,
+			})
+		} else {
+			Swal.fire(`La cuota mensual es de: $${fee}`)
+		}
+	}
+
+	function submitLoan(e) {
+		e.preventDefault()
+		const fee = calculateFee()
+		validateRevenue(fee)
+	}
+	async function submitResquest(e) {
+		e.preventDefault()
+		const formData = new FormData(e.target)
+		const data = Object.fromEntries(formData.entries())
+		data.url = 'jourdanmauricio.github.io/blacwing-js'
+
+		try {
+			const response = await fetch('https://api.lumau.com.ar/v1/contacts', {
+				method: 'POST',
+				body: JSON.stringify(data),
+				headers: { 'Content-Type': 'application/json' },
+			})
+
+			if (response.ok) {
+				Swal.fire(
+					'Formulario enviado con éxito. En breve nos pondremos en contacto!'
+				)
+				e.target.reset()
+			} else {
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'Error enviado el formulario',
+					footer: `<p><strong>Inténtalo nuevamente!</strong></p>`,
+				})
+			}
+		} catch (err) {
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: 'Error enviado el formulario',
+				footer: `<p><strong>Inténtalo nuevamente</strong></p>`,
+			})
+		}
+	}
+</script>

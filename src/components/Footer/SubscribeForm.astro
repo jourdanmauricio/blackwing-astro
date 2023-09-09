@@ -1,0 +1,185 @@
+---
+import Spinner from '../Spinner.astro'
+---
+
+<style>
+	.input__error {
+		opacity: 1;
+	}
+
+	.error__msg {
+		opacity: 0;
+	}
+
+	label {
+		position: absolute;
+		left: 0;
+	}
+
+	label,
+	input {
+		transition: all 0.3s;
+	}
+
+	input:placeholder-shown + label {
+		cursor: text;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		transform: translate(0.5rem, 0.5rem);
+	}
+
+	input:focus + label,
+	input:not(:placeholder-shown) + label {
+		transform: translate(0rem, -1.4rem);
+		cursor: pointer;
+	}
+
+	::-webkit-input-placeholder {
+		opacity: 0;
+		transition: inherit;
+	}
+
+	input:focus::-webkit-input-placeholder {
+		opacity: 1;
+		color: var(--lumau-input-text-color, #334155);
+	}
+</style>
+
+<form id="subscriber-form" method="POST" novalidate>
+	<h5 class="uppercase mb-4 text-xl font-medium text-yellow-400">Newsletter</h5>
+	<p class="text-light">
+		Recibe semanamente el resumen de nuestras novedades. Análisis de mercados.
+	</p>
+
+	<div id="loader" class="mt-4 hidden">
+		<Spinner />
+	</div>
+
+	<div id="message-container" class="mt-4 hidden">
+		<span id="message"></span>
+	</div>
+
+	<div id="form-body" class="flex gap-4 pt-4">
+		<div class="w-full">
+			<div class="relative flex flex-row-reverse mb-4">
+				<input
+					id="email"
+					class="text-slate-100 w-full border border-solid border-slate-100 rounded color py-1 px-2 min-h-max font-normal text-base bg-transparent tracking-wider disabled:bg-slate-400 outline-none outline-transparent focus:ring"
+					type="text"
+					name="email"
+					placeholder=" "
+					pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-ñ]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
+					data-error="Ingrese un Email válido"
+					required
+				/>
+				<label
+					class="disabled:bg-slate-400 min-w-max text-sm text-slate-300 py-0 px-0.5 bg-transparent"
+					for="email">Email</label
+				>
+			</div>
+
+			<div class="relative">
+				<span
+					class="absolute text-left -top-4 left-[0.2rem] w-11/12 rounded text-sm text-red-500 transition-opacity duration-1000 error__msg"
+					id="error-email"></span>
+			</div>
+		</div>
+
+		<button
+			type="submit"
+			class="text-slate-900 bg-yellow-400 hover:bg-yellow-400/50 rounded py-1 px-2 h-[2.1rem]"
+		>
+			Suscribete</button
+		>
+	</div>
+</form>
+
+<script>
+	const form = document.getElementById('subscriber-form') as HTMLFormElement
+	form.addEventListener('submit', (e) => {
+		e.preventDefault()
+		const errorForm = validate()
+		if (errorForm) return
+
+		const loader = document.getElementById('loader') as HTMLFormElement
+		const formBody = document.getElementById('form-body') as HTMLFormElement
+		const messageContainer = document.getElementById(
+			'message-container'
+		) as HTMLFormElement
+		const message = document.getElementById('message') as HTMLFormElement
+
+		const data = Object.fromEntries(new FormData(form))
+		data.url = 'jourdanmauricio.github.io/blacwing-js'
+
+		loader.classList.remove('hidden')
+		formBody.classList.add('hidden')
+
+		fetch('https://api.lumau.com.ar/v1/subscribers', {
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			method: 'POST',
+			body: JSON.stringify(data),
+		})
+			.then((response) => response.json())
+			.then((jsonData) => {
+				console.log('Response', jsonData)
+				message.innerHTML = 'En breve recibirás nuestro boletín informativo!!'
+				messageContainer.classList.remove('hidden')
+				loader.classList.add('hidden')
+			})
+			.catch((error) => {
+				message.innerHTML =
+					'Error enviando el formulario. Intentalo en unos minnutos'
+				messageContainer.classList.remove('hidden')
+				loader.classList.add('hidden')
+			})
+	})
+
+	const fieldsToValidate = form.querySelectorAll(
+		'[required], [pattern]'
+	) as NodeListOf<HTMLInputElement>
+
+	for (let i = 0; i < fieldsToValidate.length; i++) {
+		fieldsToValidate[i].addEventListener('change', () =>
+			validateField(fieldsToValidate[i])
+		)
+	}
+
+	function validate() {
+		let error = false
+
+		for (let i = 0; i < fieldsToValidate.length; i++) {
+			const errorText = validateField(fieldsToValidate[i])
+			if (errorText) {
+				error = true
+			}
+		}
+
+		if (error) return error
+	}
+
+	function validateField(field: HTMLInputElement) {
+		const error = document.getElementById(`error-${field.id}`)
+		if (error) {
+			if (field.required && field.value.length === 0) {
+				error.innerHTML = 'Requerido'
+				error.classList.remove('error__msg')
+				return 'Requerido'
+			}
+
+			if (field.pattern && field.dataset.error) {
+				let regex = new RegExp(field.pattern)
+				if (regex.exec(field.value) === null) {
+					error.classList.remove('error__msg')
+					error.innerHTML = field.dataset.error
+					return field.dataset.error
+				}
+			}
+			error.classList.add('error__msg')
+			error.innerHTML = ''
+		}
+	}
+</script>

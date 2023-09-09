@@ -1,0 +1,73 @@
+---
+import SubscribeForm from './SubscribeForm.astro'
+---
+
+<!-- Contenido del pie de página -->
+<div class="p-5 text-slate-100 bg-slate-900">
+	<footer class="pt-5">
+		<div
+			class="flex flex-col text-center md:flex-row justify-center items-start gap-4"
+		>
+			<div class="w-full md:w-2/5">
+				<h5 class="uppercase mb-4 text-xl font-medium text-yellow-400">
+					Black Wing
+				</h5>
+				<p class="text-light">
+					Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium
+					voluptates accusamus illum, commodi fugit optio tempore quo ex maiores
+				</p>
+			</div>
+
+			<div class="w-full md:w-1/5 text-center">
+				<h5 class="uppercase mb-4 text-xl font-medium text-yellow-400">
+					Links utiles
+				</h5>
+				<p class="text-center mb-1">
+					<a href="./" class="text-light">Home</a>
+				</p>
+				<p class="text-center mb-1">
+					<a href="./pages/about.html" class="text-light">Empresa</a>
+				</p>
+				<p class="text-center mb-1">
+					<a href="./pages/services.html">Servicios</a>
+				</p>
+				<p class="text-center mb-1">
+					<a href="./pages/blog.html">Blog</a>
+				</p>
+				<p class="text-center mb-1">
+					<a href="./pages/contact.html">Contacto</a>
+				</p>
+			</div>
+
+			<div class="w-full md:w-2/5">
+				<SubscribeForm />
+			</div>
+		</div>
+
+		<div
+			class="flex flex-col md:flex-row items-center md:justify-between py-4 my-4 border-t gap-4"
+		>
+			<p class="text-slate-300">
+				<small>© 2023 Black Wing. Derechos reservados.</small>
+			</p>
+			<!-- me-md-0 -->
+			<ul class="list-none flex mx-auto md:mx-0">
+				<li class="ms-3">
+					<a href="#" rel="noopener noreferrer nofollow" target="_blank">
+						<img src="/icons/twitter.svg" alt="Enlace a twitter" />
+					</a>
+				</li>
+				<li class="ms-3">
+					<a href="#" rel="noopener noreferrer nofollow" target="_blank">
+						<img src="/icons/facebook.svg" alt="Enlace a facebook" />
+					</a>
+				</li>
+				<li class="ms-3">
+					<a href="#" rel="noopener noreferrer nofollow" target="_blank">
+						<img src="/icons/instagram.svg" alt="Enlace a instagram" />
+					</a>
+				</li>
+			</ul>
+		</div>
+	</footer>
+</div>
