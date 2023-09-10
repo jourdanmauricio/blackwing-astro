@@ -1,6 +1,8 @@
-<section class="featured">
-	<article class="featured__article">
-		<h2>Servicios destacados</h2>
+<section class="p-5 flex flex-row flex-wrap items-center">
+	<article
+		class="py-5 px-0 w-[40%] flex-grow-0 flex-shrink-0 basis-full md:basis-1/2"
+	>
+		<h2 class="py-5 text-2xl text-center">Servicios destacados</h2>
 		<p>
 			Bienvenido a nuestra agencia de asesoría financiera integral con enfoque
 			en criptomonedas. Nuestro objetivo es brindar soluciones personalizadas a
@@ -14,63 +16,39 @@
 			financieros.
 		</p>
 	</article>
-	<article class="featured__article">
+	<article
+		class="px-5 w-[40%] flex-grow-0 flex-shrink-0 basis-full md:basis-1/2"
+	>
 		<img
+			class="block w-100% mx-auto"
 			src="/blackwing-astro/images/ejemplo.png"
 			alt="Imagen de la sección 1"
 		/>
 	</article>
 </section>
 
-<section class="featured featured--reverse">
-	<article class="featured__article">
-		<h2>Ultimas Noticias</h2>
+<section class="p-5 flex flex-wrap items-center flex-row-reverse">
+	<article
+		class="p-y5 px-0 w-[40%] flex-grow-0 flex-shrink-0 basis-full md:basis-1/2"
+	>
+		<h2 class="py-5 text-2xl text-center">Ultimas Noticias</h2>
 		<p>
 			Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste mollitia
 			recusandae fugiat corrupti exercitationem officia amet beatae quisquam,
 			quia facere officiis, dolores consectetur quibusdam modi corporis
-			similique sint? Nam, sapiente.
+			similique sint? Nam, sapiente. Lorem ipsum dolor sit amet consectetur
+			adipisicing elit. Perspiciatis ea quis nulla consequatur! Quis temporibus
+			odit minus animi labore nulla placeat, similique velit consequuntur
+			laboriosam magnam quam voluptatem laborum dolorem.
 		</p>
 	</article>
-	<article class="featured__article">
+	<article
+		class="px-5 w-[40%] flex-grow-0 flex-shrink-0 basis-full md:basis-1/2"
+	>
 		<img
+			class="block w-100% mx-auto"
 			src="/blackwing-astro/images/ejemplo.png"
 			alt="Imagen de la sección 2"
 		/>
 	</article>
 </section>
-
-<style>
-	.featured {
-		padding: 1.25rem;
-		display: flex;
-		flex-flow: row wrap;
-	}
-	.featured__article {
-		padding: 1.25rem 0;
-		width: 40%;
-		flex: 0 0 100%;
-	}
-	.featured__article h2 {
-		padding: 1.25rem 0;
-		font-size: 1.5rem;
-		text-align: center;
-	}
-	.featured__article img {
-		display: block;
-		width: 90%;
-		margin: 0 auto;
-	}
-	@media (min-width: 768px) {
-		.featured {
-			display: flex;
-			align-items: center;
-		}
-		.featured__article {
-			flex: 0 0 50%;
-		}
-		.featured--reverse {
-			flex-direction: row-reverse;
-		}
-	}
-</style>

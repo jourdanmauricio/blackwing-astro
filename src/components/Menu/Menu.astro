@@ -2,6 +2,7 @@
 import ThemeIcon from './ThemeIcon.astro'
 ---
 
+{Astro.url.pathname}
 <nav
 	class="sticky top-0 bg-slate-50 text-slate-800 h-20 w-full z-50 shadow-lg dark:shadow-lg dark:shadow-slate-600"
 >
@@ -41,7 +42,7 @@ import ThemeIcon from './ThemeIcon.astro'
 			<a
 				href="/blackwing-astro"
 				class={`${
-					Astro.url.pathname === '/' ? 'text-teal-800' : ''
+					Astro.url.pathname === '/blackwing-astro/' ? 'text-teal-800' : ''
 				} menu__item anim__bottom to__center`}>Home</a
 			>
 			<a
