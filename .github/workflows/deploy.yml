@@ -8,8 +8,6 @@ on:
   # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
 
-  deployment:
-
 # .env
 env:
   BACKEND: https://api.lumau.com.ar/v1
