@@ -2,7 +2,7 @@
 import ThemeIcon from './ThemeIcon.astro'
 ---
 
-{Astro.url.pathname}
+{Astro.url.pathname.replaceAll('/', '')}
 <nav
 	class="sticky top-0 bg-slate-50 text-slate-800 h-20 w-full z-50 shadow-lg dark:shadow-lg dark:shadow-slate-600"
 >
@@ -42,39 +42,47 @@ import ThemeIcon from './ThemeIcon.astro'
 			<a
 				href="/blackwing-astro"
 				class={`${
-					Astro.url.pathname === '/blackwing-astro/' ? 'text-teal-800' : ''
+					Astro.url.pathname.replaceAll('/', '') === 'blackwing-astro'
+						? 'text-teal-800'
+						: ''
 				} menu__item anim__bottom to__center`}>Home</a
 			>
 			<a
 				href="/blackwing-astro/about"
 				class={`${
-					Astro.url.pathname === '/blackwing-astro/about' ? 'text-teal-800' : ''
+					Astro.url.pathname.replaceAll('/', '') === 'blackwing-astroabout'
+						? 'text-teal-800'
+						: ''
 				} menu__item anim__bottom to__center`}>Empresa</a
 			>
 			<a
 				href="/blackwing-astro/services"
 				class={`${
-					Astro.url.pathname === '/blackwing-astro/services'
+					Astro.url.pathname.replaceAll('/', '') === 'blackwing-astroservices'
 						? 'text-teal-800'
 						: ''
 				} menu__item anim__bottom to__center`}>Servicios</a
 			>
 			<a
-				href="/blackwing-astro/blog"
+				href="/blackwing-astro/blog/"
 				class={`${
-					Astro.url.pathname === '/blackwing-astro/blog' ? 'text-teal-800' : ''
+					Astro.url.pathname.replaceAll('/', '') === 'blackwing-astroblog'
+						? 'text-teal-800'
+						: ''
 				} menu__item anim__bottom to__center`}>Blog</a
 			>
 			<a
-				href="/blackwing-astro/loans"
+				href="/blackwing-astro/loans/"
 				class={`${
-					Astro.url.pathname === '/blackwing-astro/loans' ? 'text-teal-800' : ''
+					Astro.url.pathname.replaceAll('/', '') === 'blackwing-astroloans'
+						? 'text-teal-800'
+						: ''
 				} menu__item anim__bottom to__center`}>Préstamos</a
 			>
 			<a
-				href="/blackwing-astro/contact"
+				href="/blackwing-astro/contact/"
 				class={`${
-					Astro.url.pathname === '/blackwing-astro/contact'
+					Astro.url.pathname.replaceAll('/', '') === 'blackwing-astrocontact'
 						? 'text-teal-800'
 						: ''
 				} menu__item anim__bottom to__center`}>Contacto</a
