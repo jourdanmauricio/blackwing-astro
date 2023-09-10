@@ -11,9 +11,9 @@ on:
   deployment:
 
 # .env
-# env:
-#   BACKEND: ${{ secrets.BACKEND }}
-#   URL: ${{ secrets.URL }}
+env:
+  BACKEND: https://api.lumau.com.ar/v1
+  URL: jourdanmauricio.github.io/blackwing-astro
 
 # Allow this job to clone the repo and create a page deployment
 permissions:
@@ -33,10 +33,11 @@ jobs:
           fetch-depth: 0
 
       - name: Install, build, and upload your site
-        # env:
-        #   BACKEND: ${{ env.BACKEND }}
-        #   URL: ${{ env.URL }}
+        env:
+          BACKEND: ${{ secrets.BACKEND }}
+          URL: ${{ secrets.URL }}
         uses: withastro/action@v0
+
         # with:
         # path: . # The root location of your Astro project inside the repository. (optional)
         # node-version: 16 # The specific version of Node that should be used to build your site. Defaults to 16. (optional)
