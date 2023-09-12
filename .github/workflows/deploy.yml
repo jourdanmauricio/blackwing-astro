@@ -12,7 +12,7 @@ on:
 # .env
 env:
   BACKEND: https://api.lumau.com.ar/v1
-  URL: jourdanmauricio.github.io/blackwing-astro
+  URL: https://jourdanmauricio.github.io/blackwing-astro
 
 # Allow this job to clone the repo and create a page deployment
 permissions:
