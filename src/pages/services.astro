@@ -22,60 +22,11 @@ try {
 	if (res.status !== 200) {
 		console.log('Error GET Services: ', res.status, res.statusText)
 	}
-	services = await res.json()
+	const response: Service[] = await res.json()
+	services = response.sort((a, b) => a.order - b.order)
 } catch (error) {
 	console.log('ERROR DE CONEXION. Contacte al administrador!!!!', error)
 }
-
-// const services = [
-// 	{
-// 		image: '/blackwing-astro/images/servicio-1.png',
-// 		alt: 'Servicio 1',
-// 		title: 'Gestión patrimonial',
-// 		content:
-// 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis suscipit harum at ipsum ea similique mollitia quod eaque illo amet, numquam ex veritatis molestias possimus. Veritatis esse a in reiciendis?',
-// 	},
-
-// 	{
-// 		image: '/blackwing-astro/images/servicio-2.png',
-// 		alt: 'Servicio 2',
-// 		title: 'Atención personalizada',
-// 		content:
-// 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis suscipit harum at ipsum ea similique mollitia quod eaque illo amet, numquam ex veritatis molestias possimus. Veritatis esse a in reiciendis?',
-// 	},
-
-// 	{
-// 		image: '/blackwing-astro/images/servicio-3.png',
-// 		alt: 'Servicio 3',
-// 		title: 'Auditorias',
-// 		content:
-// 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis suscipit harum at ipsum ea similique mollitia quod eaque illo amet, numquam ex veritatis molestias possimus. Veritatis esse a in reiciendis?',
-// 	},
-
-// 	{
-// 		image: '/blackwing-astro/images/servicio-4.png',
-// 		alt: 'Servicio 4',
-// 		title: 'Asesoramiento técnico',
-// 		content:
-// 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis suscipit harum at ipsum ea similique mollitia quod eaque illo amet, numquam ex veritatis molestias possimus. Veritatis esse a in reiciendis?',
-// 	},
-
-// 	{
-// 		image: '/blackwing-astro/images/servicio-5.png',
-// 		alt: 'Servicio 5',
-// 		title: 'Capacitaciones',
-// 		content:
-// 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis suscipit harum at ipsum ea similique mollitia quod eaque illo amet, numquam ex veritatis molestias possimus. Veritatis esse a in reiciendis?',
-// 	},
-
-// 	{
-// 		image: '/blackwing-astro/images/servicio-6.png',
-// 		alt: 'Servicio 6',
-// 		title: 'Certificaciones',
-// 		content:
-// 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis suscipit harum at ipsum ea similique mollitia quod eaque illo amet, numquam ex veritatis molestias possimus. Veritatis esse a in reiciendis?',
-// 	},
-// ]
 ---
 
 <Layout>
@@ -110,24 +61,24 @@ try {
 				class="max-w-[61.25rem] my-0 mx-auto flex items-center justify-center gap-8 flex-wrap"
 			>
 				{
-					services.length > 0 &&
-						services.map((service) => (
-							<div class="py-4 max-w-[18.75rem] flex-grow flex-shrink basis-[18.75rem] hover:shadow-lg dark:hover:shadow-white">
-								<div class="max-w-[3.175rem] my-0 mx-auto">
-									<img
-										class="w-full block bg-slate-100 rounded-full"
-										src={service.image}
-										alt={service.altImage}
-									/>
-								</div>
-								<div>
-									<h3 class="p-4 text-center">
-										<strong>{service.title}</strong>
-									</h3>
-									<p class="px-3">{service.content}</p>
-								</div>
+					// services.length > 0 &&
+					services.map((service) => (
+						<div class="py-4 max-w-[18.75rem] flex-grow flex-shrink basis-[18.75rem] hover:shadow-lg dark:hover:shadow-white">
+							<div class="max-w-[3.175rem] my-0 mx-auto">
+								<img
+									class="w-full block bg-slate-100 rounded-full"
+									src={service.image}
+									alt={service.altImage}
+								/>
 							</div>
-						))
+							<div>
+								<h3 class="p-4 text-center">
+									<strong>{service.title}</strong>
+								</h3>
+								<p class="px-3">{service.content}</p>
+							</div>
+						</div>
+					))
 				}
 			</div>
 		</section>
